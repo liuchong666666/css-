@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>div下浮动子div居中问题</title>
+</head>
+<style>
+    * {
+        margin: 0;
+        padding: 0;
+    }
+
+    #d1 {
+        width: 1000px;
+        height: 800px;
+        border: 1px solid red;
+        text-align: center;
+        /*position: relative;*/
+    }
+
+    #d2 {
+        width: 200px;
+        height: 100px;
+        background: blue;
+        margin: 0 auto;
+    }
+
+    #d3 {
+        width: 800px;
+        height: 600px;
+        border: 1px solid red;
+        /*display: flex;*/
+        /*align-items: center;*/
+        /*justify-content: center;*/
+
+        /*position: absolute;*/
+        /*top: 50%;*/
+        /*left: 50%;*/
+        /*transform: translate(-50%,-50%);*/
+    }
+
+    .d3_son {
+        width: 300px;
+        height: 200px;
+        background: blue;
+        border: 1px solid yellow;
+        color: white;
+        /*float: left;*/
+        display: inline-block;
+
+
+
+    }
+
+    .son {
+        background: yellow;
+    }
+</style>
+<body>
+<div id="d1">
+    <div id="d2">
+        单个子元素
+    </div>
+    <div id="d3">
+        <div class="d3_son">多个子元素1</div>
+        <div class="d3_son son">多个子元素2</div>
+    </div>
+</div>
+<script>
+    //    爷 父 子
+    //单个子元素
+    //直接 margin: 0 auto;
+
+
+    //多个子元素
+    //方法一：（这是水平居中）
+    //首先将float去掉，
+    //然后设置子其为display:inline-block
+    //父元素不设置任何样式
+    //然后设置爷元素为text-align:center
+    //这样有个问题，多个元素之间的换行符和空格 都会在页面内显示，如果需要去除，就不要换行
+
+    //方法二：（这是垂直水平居中）
+    // 父元素设置：用弹性盒子，注意兼容性
+    /*display: flex;*/
+    /*align-items: center;*/
+    /*justify-content: center;*/
+    //这个方法没有空格和换行符因素
+
+
+    //方法三：（这是垂直水平居中）
+    // 父元素设置：
+    //position: relative;
+    //子元素设置：
+    //    position: absolute;
+    //    top: 50%;
+    //    left: 50%;
+    //    transform: translate(-50%,-50%);
+</script>
+</body>
+</html>

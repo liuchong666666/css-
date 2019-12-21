@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>如何让div宽高自适应子元素宽高</title>
+    <style>
+        #d1{
+            display: inline-block;
+            border: 1px solid red;
+        /*margin: 0 auto;*/
+        }
+        #d2{
+            width: 100px;
+            height: 100px;
+            background: blue;
+        }
+    </style>
+</head>
+<body>
+<div id="d1">
+    <div id="d2"></div>
+</div>
+<script>
+    //父元素设置display: inline-block;就可以了
+</script>
+</body>
+</html>
