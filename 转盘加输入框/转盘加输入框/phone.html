@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <style>
+    input[type="text"] {
+      width: 300px;
+      height: 100px;
+      /* border: 1px solid rgba(0,0,0,0); */
+      border: none;
+      opacity: 1;
+      background: rgba(0,0,0,.1);
+      /* background-color: red; */
+      color: yellow;
+      outline: none;
+      font-size: 80px;
+    }
+    div{
+      width: 100px;
+      float: left;
+      border: 1px solid red;
+      /*text-align: center;*/
+      /*text-justify: newspaper;*/
+      /*white-space:pre-wrap;*/
+    }
+  </style>
+</head>
+<body>
+<input type="text" id="input">
+<button onclick="focuse()">focuse</button>
+<div>1111111111111111111111111111111111111111111111111</div>
+<script>
+  function focuse() {
+    var inputs = document.getElementById("input")
+    inputs.focus();
+  }
+</script>
+</body>
+</html>

@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <script src="jquery-3.2.1.min.js"></script>
+  <style>
+.home-zhizhen {
+    position: absolute;
+    left: 0;
+    top: 0;
+    z-index: 1;
+    width: 272px;
+    height: 272px;
+}
+.home-zhizhen1 {
+
+    background: url("zhizhen/zhizhen1.png") no-repeat;
+    background-size: 100% 100%;
+}
+.home-zhizhen2 {
+
+    background: url("zhizhen/zhizhen2.png") no-repeat;
+    background-size: 100% 100%;
+}
+.home-zhizhen3 {
+
+    background: url("zhizhen/zhizhen3.png") no-repeat;
+    background-size: 100% 100%;
+}
+.home-zhizhen4 {
+
+    background: url("zhizhen/zhizhen4.png") no-repeat;
+    background-size: 100% 100%;
+}
+.home-zhizhen5 {
+
+    background: url("zhizhen/zhizhen5.png") no-repeat;
+    background-size: 100% 100%;
+}
+.home-zhizhen6 {
+
+    background: url("zhizhen/zhizhen6.png") no-repeat;
+    background-size: 100% 100%;
+}
+.home-zhizhen7 {
+
+    background: url("zhizhen/zhizhen7.png") no-repeat;
+    background-size: 100% 100%;
+}
+
+.home-zhizhen8 {
+
+    background: url("zhizhen/zhizhen8.png") no-repeat;
+    background-size: 100% 100%;
+}
+.hide-div {
+    display: none;
+}
+button {
+    width: 200px;
+    height: 200px;
+    margin-top: 300px;
+}
+#home_yuanquan {
+    position: absolute;
+    left: 0;
+    top: 0;
+    z-index: 2;
+    width: 272px;
+    height: 272px;
+    background: url("zhizhen/start_default.png") no-repeat;
+    background-size: 100% 100%;
+}
+#pan {
+    position: absolute;
+    left: 0;
+    top: 0;
+    z-index: 0;
+    width: 272px;
+    height: 272px;
+    background: url("zhizhen/pan.png") no-repeat;
+    background-size: 100% 100%;
+}
+  </style>
+</head>
+<body>
+<div id="d1">
+  <div id="pan" class="pan"></div>
+  <div id="home_yuanquan" class="home-yuanquan home-dyp-start-no"></div>
+  <div id="home_zhizhen1" class="home-zhizhen1 home-zhizhen "></div>
+  <div id="home_zhizhen2" class="home-zhizhen2 home-zhizhen hide-div"></div>
+  <div id="home_zhizhen3" class="home-zhizhen3 home-zhizhen hide-div"></div>
+  <div id="home_zhizhen4" class="home-zhizhen4 home-zhizhen hide-div"></div>
+  <div id="home_zhizhen5" class="home-zhizhen5 home-zhizhen hide-div"></div>
+  <div id="home_zhizhen6" class="home-zhizhen6 home-zhizhen hide-div"></div>
+  <div id="home_zhizhen7" class="home-zhizhen7 home-zhizhen hide-div"></div>
+  <div id="home_zhizhen8" class="home-zhizhen8 home-zhizhen hide-div"></div>
+</div>
+<button onclick="start()">
+start
+</button>
+<button onclick="stop()">
+stop
+</button>
+<script>
+
+  // setInterval()有时不准
+  var obj = {
+      start: function (roateQs, stopIdx, zhizhen) { //roateQs:转多少圈，stopIdx：停到哪一格
+          var roateQs = 6;
+          var count = 0;//控制显示的元素下标
+          var time = null;//定时器id
+          var times = 100;//定时器时间
+          var roateI = 0;//控制圈数
+          //转盘八格
+          //roateQs转动的圈数，至少要大于4，因为匀速4圈,减速看起来效果好看，不减速就可以不大于4
+          //stopIdx 转动停留到哪格
+          //zhizhen 需要转动的指针类  (比如给所有指针加上 home-zhizhen类)
+          var $zhizhen = $('.' + zhizhen + '');   //$(".home-zhizhen");
+          if (!stopIdx) {
+              stopIdx = 0;//不传就为0
+          }
+          //0   8   16    8n   都为0格
+          return (function roate() {
+              time = setTimeout(function () {
+                  for (var i = 0; i < $zhizhen.length; i++) {
+                      $zhizhen.eq(i).hide();
+                  }
+                  $zhizhen.eq(count).show();
+                  count++;
+                  if (count === 8) {
+                      count = 0;
+                  }
+                  roateI++;
+                  var qs = roateI / 8; //圈数
+                  if (qs >= 4) {//先匀数两圈，后减速
+                      console.log("开始减速");
+                      times += 10;//时间增加，速度减小
+                  }
+                  var stopI = roateI % 8;//转动时候的格数第几格
+                  if (stopIdx >= 8) {//超过0-7 就取余
+                      stopIdx = stopIdx % 8;
+                  }
+                  if (qs >= roateQs && stopI === stopIdx) {
+                      console.log("stopIdx:", stopIdx);
+                      console.log("roateI:", roateI);
+                      console.log("qs:", qs);
+                      clearInterval(time);
+                      count = 0;
+                      times = 100;
+                      roateI = 0;
+                      return null;
+                  }
+                  roate();
+              }, times);
+          })();
+      },
+
+  };
+
+
+  function stop() {
+      clearInterval(time);
+  }
+
+  function start(b) {
+      count = 0;
+      times = 100;
+      roateI = 0;
+      obj.start(2, b, "home-zhizhen");
+  }
+
+
+
+</script>
+</body>
+</html>
